@@ -16,6 +16,19 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@auth/*": ["src/apps/auth/*"],
+      "@base/*": ["src/shared/base/*"],
+      "@users/*": ["src/apps/users/*"],
+      "@todos/*": ["src/apps/todos/*"],
+      "@guards/*": ["src/shared/guards/*"],
+      "@filters/*": ["src/shared/filters/*"],
+      "@modules/*": ["src/modules/*"],
+      "@entities/*": ["src/entities/*"],
+      "@constants/*": ["src/shared/constants/*"],
+      "@decorators/*": ["src/shared/decorators/*"],
+      "@strategies/*": ["src/shared/strategies/*"]
+    }
   }
 }
