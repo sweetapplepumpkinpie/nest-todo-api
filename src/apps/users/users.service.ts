@@ -1,23 +1,26 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
+import { User } from '@entities/user.entity';
+import { BaseService } from '@base/base.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { User } from './entity/user.entity';
 
 @Injectable()
-export class UsersService {
+export class UsersService extends BaseService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-  ) {}
+  ) {
+    super();
+  }
 
   async register(createUserDto: CreateUserDto): Promise<User> {
     const email = createUserDto.email;
     const user = await this.userRepository.findOneBy({ email });
     if (user) {
-      throw new HttpException('Email already exists', HttpStatus.BAD_REQUEST);
+      this._throwAlreadyExistException('Email already exists');
     } else {
       const user = new User();
       const hash = bcrypt.hashSync(createUserDto.password, 10);
